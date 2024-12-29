@@ -53,7 +53,7 @@ export const AuthProvider = ({children}) => {
             console.log('user', user);
             localStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            navigate(user.isVerified ? '/' : '/verify-email');
+            // navigate(user.isVerified ? '/' : '/verify-email');
             toast.success('Logged in successfully',{
                 position: 'bottom-right'
             });
@@ -77,8 +77,7 @@ export const AuthProvider = ({children}) => {
             console.log('user', user);
             localStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            
-            navigate(user.isVerified ? '/' : '/verify-email');
+            // navigate(user.isVerified ? '/' : '/verify-email');
         }
         catch(error){
             console.error('signup failed', error);
