@@ -8,12 +8,14 @@ import { CLIENT_URI } from '../utils/envVariables.js';
 
 export const login = async (req, res)=>{
     const { email, password } = req.body;
+    console.log(email);
     try{
         if(!email || !password){
             return res.status(400).json({message: 'Please fill in all fields'});
         }
         
         const user = await User.findOne({email});
+        console.log(user);
         if(!user){
             return res.status(400).json({message: `User doesn't exist`});
         }
@@ -21,9 +23,9 @@ export const login = async (req, res)=>{
         if(!passwordMatch){
             return res.status(400).json({message: 'Invalid password'});
         }
-        if(!user.isVerified){
-            return res.status(403).json({message: 'Email not verified. Please verify your email', redirect: true});
-        }
+        // if(!user.isVerified){
+        //     return res.status(403).json({message: 'Email not verified. Please verify your email', redirect: true});
+        // }
 
         const token = generateTokenAndSetCookie(res, user._id);
         await user.save();
